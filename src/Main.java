@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
+
 
         int points = 0;
 
@@ -25,6 +25,8 @@ public class Main {
         };
 
         // START QUIZ
+        Scanner scanner = new Scanner(System.in);
+
         for(int loop = 0; loop < question.length; loop++) {
         System.out.println(question[loop]);
 
