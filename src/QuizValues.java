@@ -20,6 +20,6 @@ public class QuizValues {
                 "You done goofed up, the actual answer is: ",
         };
 
-        QuizLogic.QuizLogic(question, points, answer, responses);
+        QuizLogic.quizLogic(question, points, answer, responses);
     }
 }

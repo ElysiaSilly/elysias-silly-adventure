@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class QuizLogic {
-    public static void QuizLogic(String[] question, int points, String[] answer, String[] responses) {
+    public static void quizLogic(String[] question, int points, String[] answer, String[] responses) {
         // START QUIZ
         Scanner scanner = new Scanner(System.in);
 
