@@ -3,14 +3,14 @@ import java.util.Scanner;
 
 public class TicTacToe {
 
-    public static String[][] grid = {
-            {"•", "ADG"}, {"•", "AE"},   {"•", "AFH"},
-            {"•", "BD"},  {"•", "BEGH"}, {"•", "BF"},
-            {"•", "CDH"}, {"•", "CE"},   {"•", "CFG"}
+    public static int[][] gameGrid = {
+            {0, 036}, {0, 04},   {0, 057},
+            {0, 13},  {0, 1467}, {0, 15},
+            {0, 237}, {0, 24},   {0, 256}
     };
 
-    public static String[][] playerScore = {
-            {"A", "0", "0"}, {"B", "0", "0"}, {"C", "0", "0"}, {"D", "0", "0"}, {"E", "0", "0"}, {"F", "0", "0"}, {"G", "0", "0"}, {"H", "0", "0"}
+    public static int[][] playerScore = {
+            {0, 0, 0}, {1, 0, 0}, {2, 0, 0}, {3, 0, 0}, {4, 0, 0}, {5, 0, 0}, {6, 0, 0}, {7, 0, 0}
     };
 
     public static void main(String[] args) {
@@ -19,27 +19,26 @@ public class TicTacToe {
 
         Scanner scan = new Scanner(System.in);
 
-        boolean tryAgain = false;
+        boolean tryAgain = true;
 
-        while(!tryAgain) {
+        while(tryAgain) {
 
             String startGame = scan.next().toLowerCase();
 
             switch(startGame) {
                 case "y":
                     print("Awesome! Let's get started.");
-                    tryAgain = true;
+                    tryAgain = false;
                     initGame();
                     break;
                 case "n":
                     print("Party pooper ):");
-                    tryAgain = true;
+                    tryAgain = false;
                     break;
                 default:
                     print("Not a valid response, please try again.");
             }
         }
-
         scan.close();
     }
 
@@ -69,48 +68,46 @@ public class TicTacToe {
         while(!turnOver) {
             playerInput = Integer.parseInt(scan.next()) - 1;
 
-            if (Objects.equals(grid[playerInput][0], "•")) {
-                grid[playerInput][0] = symbol;
+            if (gameGrid[playerInput][0] == 0) {
+                gameGrid[playerInput][0] = player;
                 turnOver = true;
             } else {
                 print("Space already occupied! Try again.");
             }
         }
-
-        switch(player) {
-            case 1:
-                updatePlayerScore(playerInput, player,1);
-                break;
-            case 2:
-                updatePlayerScore(playerInput, player, 2);
-                break;
-            default:
-        }
+        updatePlayerScore(playerInput, player);
     }
 
-    public static void updatePlayerScore(int playerInput, int player, int playerPos) {
-        String currentSpace = grid[playerInput][1];
+    public static void updatePlayerScore(int playerInput, int player) {
+
+        // I broke this method somehow i dont know whats going on god save me
+
+        String currentSpace = String.valueOf(gameGrid[playerInput][1]);
 
         for(int loop = 0; loop < playerScore.length; loop++) {
 
+            String currentScore = String.valueOf(playerScore[loop][0]);
+
             boolean containsChar = false;
 
-            containsChar = currentSpace.contains(playerScore[loop][0]);
+            containsChar = currentSpace.contains(currentScore);
 
             if(containsChar) {
-                int combinationsInt = Integer.parseInt(playerScore[loop][playerPos]);
+                int combinationsInt = playerScore[loop][player];
 
-                playerScore[loop][playerPos] = String.valueOf(combinationsInt + 1);
+                playerScore[loop][player] = combinationsInt + 1;
             }
         }
 
         for(int loop = 0; loop < playerScore.length; loop++) {
-            boolean containsChar = playerScore[loop][playerPos].contains("3");
-            if(containsChar) { gameOverWon(player); }
+            String IDontFuckingKnowAnymore = String.valueOf(playerScore[loop][player]);
+
+            boolean containsChar = IDontFuckingKnowAnymore.contains("3");
+            if(containsChar) { gameWon(player); }
         }
     }
 
-    public static void gameOverWon(int player) {
+    public static void gameWon(int player) {
         print("");
         updateGrid();
         print("Congrats! Player " + player + " has won.");
@@ -118,9 +115,9 @@ public class TicTacToe {
     }
 
     public static void updateGrid() {
-        print(grid[0][0] + " " + grid[1][0] + " " + grid[2][0]);
-        print(grid[3][0] + " " + grid[4][0] + " " + grid[5][0]);
-        print(grid[6][0] + " " + grid[7][0] + " " + grid[8][0]);
+        print(gameGrid[0][0] + " " + gameGrid[1][0] + " " + gameGrid[2][0]);
+        print(gameGrid[3][0] + " " + gameGrid[4][0] + " " + gameGrid[5][0]);
+        print(gameGrid[6][0] + " " + gameGrid[7][0] + " " + gameGrid[8][0]);
     }
 
     public static void print(String x) {
